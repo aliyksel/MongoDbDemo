@@ -137,7 +137,7 @@ public class CustomerRepositoryCustomImpl implements CustomerRepositoryCustom {
 
 		Update updateObj = new Update()
 				.push("bills.$.items", foundItem.getItem()).inc("bills.$.totalSpend", price - oldPrice).inc("totalSpend", price-oldPrice);
-		mongoTemplate.updateMulti(query(where("_id").is(customerId).and("bills.billId").is(billId).and("totalSpend").is(foundItem.getTotalSpendLiteral()).and("bills.totalSpend").is(foundItem.getBillSpendLiterel())),updateObj,Customer.class);
+		mongoTemplate.updateMulti(query(where("_id").is(customerId).and("totalSpend").is(foundItem.getTotalSpendLiteral()).and("bills").elemMatch(where("billId").is(billId).and("totalSpend").is(foundItem.getBillSpendLiterel()))),updateObj,Customer.class);
 				
 		updateObj = new Update()
 		         .pull("bills.$.items", query(where("barcode").is(barcode).and("price").is(oldPrice)));

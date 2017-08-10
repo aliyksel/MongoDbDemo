@@ -79,7 +79,6 @@ public class MongoDbDemoApplicationTests {
 		bill.addItem(new Item(113,"bread 2",120));
 		cust1.addBill(bill);
 		
-		//customerService.addBilltoCustomer(bill);
 		
 		Customer cc = customerRepo.save(cust1);
 		
@@ -114,5 +113,4 @@ public class MongoDbDemoApplicationTests {
 		Customer customer = customerRepo.findById(customerId);
 		assertEquals(470, customer.getTotalSpend());
 	}
-	
 }
